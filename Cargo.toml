@@ -1,6 +1,34 @@
+[package]
+name = "demo-aqlm-rs"
+version = "0.1.0"
+edition = "2025"
+
+[[bin]]
+name = "demo-aqlm-rs"
+path = "src/main.rs"
+
+[lib]
+name = "demo_aqlm_rs"
+path = "src/lib.rs"
+crate-type = ["rlib"]
+
 [workspace]
+resolver = "2"
 members = [
     "src/core/tensorlib",
     "src/core/state_dict",
-    "src/core/nn", "cmd/wasm", "src/core/generator", "src/tokenizer", "src/worker_engine",
+    "src/core/nn",
+    "cmd/wasm",
+    "src/core/generator",
+    "src/tokenizer",
+    "src/worker_engine"
 ]
+
+[workspace.dependencies]
+# Зависимости для WASM и генерации случайных чисел
+wasm-bindgen = { version = "0.2.93", features = ["serde-serialize"] }
+wasm-bindgen-futures = "0.4.43"
+js-sys = "0.3.70"
+rand = { version = "0.8.5", features = ["small_rng"] }
+getrandom = { version = "0.2.12", features = ["js"] }
+
